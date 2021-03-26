@@ -43,7 +43,7 @@
     </body>
 <script src="/socket.io/socket.io.js"></script>  
   <script>
-        const socket = io("http://localhost");
+        const socket = io("https://code-share-zxo.herokuapp.com");
         socket.on('code',(s)=>{
             _('code').value = s;
         })
