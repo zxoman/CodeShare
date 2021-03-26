@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title>code</title>
+        <style>
+            body{
+                background-color: #253db1;
+                text-align: center;
+            }
+            h2{
+                color: #ffffff;
+                font-size: 60px;
+            }
+            #code{
+                border-radius: 20px;
+                font-size: 30px;
+                width: 45%;
+                height: 70%;
+            }
+            #iframe{
+                width: 45%;
+                height: 70%;
+                border: none;
+                border-radius: 20px;
+                background: white;
+            }
+            button{
+                background: white;
+                width: 7%;
+                height: 5%;
+                margin-bottom: 1%;
+                border: none;
+                border-radius: 5px;
+                font-size: 20;
+                color: #253db1;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Code</h2>
+        <button onclick="run()">run</button><br>
+        <textarea onchange="send()" id="code"></textarea>
+        <iframe id="iframe"></iframe>
+    </body>
+<script src="/socket.io/socket.io.js"></script>  
+  <script>
+        const socket = io("http://localhost");
+        socket.on('code',(s)=>{
+            _('code').value = s;
+        })
+        function send(){
+            socket.emit('code',_('code').value)
+        }
+        function _(id) {
+            return document.getElementById(id);
+        }
+        function run() {
+            var url = "https://zxodarkness.000webhostapp.com/code.php?html="+encodeURI(_('code').value);
+            _('iframe').src = url
+        }
+    </script>
+</html>
